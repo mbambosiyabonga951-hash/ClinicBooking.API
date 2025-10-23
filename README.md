@@ -1,4 +1,4 @@
-# ClinicBooking_EFCore_Dapper_NLog_net8
+# Clinic Booking
 
 Clean Architecture starter with **.NET 8**, **ASP.NET Core (controllers)**, **EF Core + Dapper**, and **NLog**.
 
