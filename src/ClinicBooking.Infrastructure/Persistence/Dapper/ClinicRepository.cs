@@ -13,7 +13,7 @@ namespace ClinicBooking.Infrastructure.Persistence.Dapper
             {
                 using (var c = factory.Create())
                 {
-                    var sql = "SELECT Id, Name, Address FROM dbo.Clinics ORDER BY Name";
+                   var sql = "SELECT Id, Name, Address FROM dbo.Clinics ORDER BY Name";
                     return await c.QueryAsync<Clinic>(new CommandDefinition(sql, cancellationToken: ct));
                 }
             }

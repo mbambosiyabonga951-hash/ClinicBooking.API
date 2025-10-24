@@ -1,21 +1,25 @@
-using Microsoft.EntityFrameworkCore;
 using ClinicBooking.Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 
-namespace ClinicBooking.Infrastructure.Persistence;
-
-public class ClinicBookingDbContext(DbContextOptions<ClinicBookingDbContext> options) : DbContext(options)
+namespace ClinicBooking.Infrastructure.Persistence
 {
-    public DbSet<Patient> Patients => Set<Patient>();
-    public DbSet<Clinic> Clinics => Set<Clinic>();
-    public DbSet<Appointment> Appointments => Set<Appointment>();
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    public class ClinicBookingDbContext : DbContext
     {
-        modelBuilder.Entity<Patient>().HasKey(x => x.Id);
-        modelBuilder.Entity<Clinic>().HasKey(x => x.Id);
-        modelBuilder.Entity<Appointment>().HasKey(x => x.Id);
+        public ClinicBookingDbContext(DbContextOptions<ClinicBookingDbContext> options)
+            : base(options) { }
 
-        modelBuilder.Entity<Appointment>()
-            .HasIndex(a => new { a.ClinicId, a.Date });
+        public DbSet<Patient> Patients => Set<Patient>();
+        public DbSet<Clinic> Clinics => Set<Clinic>();
+        public DbSet<Appointment> Appointments => Set<Appointment>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Patient>().HasKey(x => x.Id);
+            modelBuilder.Entity<Clinic>().HasKey(x => x.Id);
+            modelBuilder.Entity<Appointment>().HasKey(x => x.Id);
+
+            modelBuilder.Entity<Appointment>()
+                .HasIndex(a => new { a.ClinicId, a.Date });
+        }
     }
 }

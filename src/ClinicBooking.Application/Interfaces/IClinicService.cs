@@ -1,8 +1,10 @@
 using ClinicBooking.Application.DTOs;
 
-namespace ClinicBooking.Application.Interfaces;
-
-public interface IClinicService
+namespace ClinicBooking.Application.Interfaces
 {
-    Task<IEnumerable<ClinicDto>> GetAllAsync(CancellationToken ct);
+
+    public interface IClinicService
+    {
+        Task<IEnumerable<ClinicDto>> GetAllAsync(CancellationToken ct);
+    }
 }
