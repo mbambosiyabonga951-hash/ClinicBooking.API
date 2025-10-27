@@ -36,7 +36,6 @@ public class AppointmentsController : ControllerBase
         }
         catch (Exception ex)
         {
-            // _logger.LogError(ex, "Error retrieving appointments");
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new { message = "An error occurred while retrieving appointments.", details = ex.Message });
         }
@@ -63,7 +62,6 @@ public class AppointmentsController : ControllerBase
         }
         catch (Exception ex)
         {
-            // _logger.LogError(ex, "Error booking appointment");
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new { message = "An unexpected error occurred while booking the appointment.", details = ex.Message });
         }

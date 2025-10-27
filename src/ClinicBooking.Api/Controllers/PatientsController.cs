@@ -12,6 +12,7 @@ namespace ClinicBooking.Api.Controllers;
 public class PatientsController : ControllerBase
 {
     private readonly IPatientService service;
+    private object _logger;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PatientsController"/> class.
@@ -36,8 +37,6 @@ public class PatientsController : ControllerBase
         }
         catch (Exception ex)
         {
-            // Optionally log the error (e.g., using NLog)
-            // _logger.LogError(ex, "Error retrieving patients");
 
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new { message = "An error occurred while retrieving patients.", details = ex.Message });
@@ -65,7 +64,6 @@ public class PatientsController : ControllerBase
         }
         catch (Exception ex)
         {
-            // _logger.LogError(ex, "Error creating patient");
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new { message = "An unexpected error occurred while creating the patient.", details = ex.Message });
         }

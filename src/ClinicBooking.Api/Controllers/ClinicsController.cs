@@ -41,9 +41,6 @@ public class ClinicsController : ControllerBase
         }
         catch (Exception ex)
         {
-            // Optionally log the error (e.g., using NLog)
-            // _logger.LogError(ex, "Error retrieving clinics");
-
             return StatusCode(StatusCodes.Status500InternalServerError,
                 new { message = "An error occurred while retrieving clinics.", details = ex.Message });
         }
