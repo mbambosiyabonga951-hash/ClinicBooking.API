@@ -1,0 +1,6 @@
+services:
+  clinicbooking.api:
+    image: ${DOCKER_REGISTRY-}clinicbookingapi
+    build:
+      context: .
+      dockerfile: src/ClinicBooking.Api/Dockerfile
