@@ -9,7 +9,7 @@ namespace ClinicBooking.Infrastructure.Persistence.Dapper
         public async Task<IEnumerable<Provider>> GetAllAsync(CancellationToken ct)
         {
             using var connection = factory.Create();
-            var sql = "SELECT Id, FullName, Specialty FROM Providers ORDER BY Id DESC";
+            var sql = "SELECT Id, Name,ClinicId, Specialty FROM Providers ORDER BY Id DESC";
             return await connection.QueryAsync<Provider>(new CommandDefinition(sql, cancellationToken: ct));
 
         }

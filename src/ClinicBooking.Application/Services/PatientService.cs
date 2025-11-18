@@ -17,13 +17,29 @@ namespace ClinicBooking.Application.Services
         }
         public async Task<IEnumerable<PatientDto>> GetAllAsync(CancellationToken ct)
         {
-            var items = await _patientRepository.GetAllAsync(ct);
-            return items.Select(p => new PatientDto(p.Id, p.FirstName, p.LastName, p.Email));
+            try
+            {
+                var items = await _patientRepository.GetAllAsync(ct);
+                return items.Select(p => new PatientDto(p.Id, p.FirstName, p.LastName, p.Email));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while retrieving patients.");
+                throw;
+            }
         }
         public async Task<PatientDto> CreateAsync(CreatePatientRequest request, CancellationToken ct)
         {
-            var entity = await _patientRepository.CreateAsync(request.FirstName, request.LastName, request.Email, ct);
-            return new PatientDto(entity.Id, entity.FirstName, entity.LastName, entity.Email);
+            try
+            {
+                var entity = await _patientRepository.CreateAsync(request.FirstName, request.LastName, request.Email, ct);
+                return new PatientDto(entity.Id, entity.FirstName, entity.LastName, entity.Email);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "An error occurred while creating a patient.");
+                throw;
+            }
         }
     }
 }

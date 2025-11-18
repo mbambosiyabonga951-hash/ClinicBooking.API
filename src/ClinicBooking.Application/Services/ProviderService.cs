@@ -24,8 +24,9 @@ namespace ClinicBooking.Application.Services
             return providers.Select(p => new ProviderDto
             {
                 Id = p.Id,
-                FullName = p.FullName,
-                Specialty = p.Specialty
+                Name = p.Name,
+                Specialty = p.Specialty,
+                ClinicId = p.ClinicId
             });
 
 
@@ -43,7 +44,7 @@ namespace ClinicBooking.Application.Services
             return new ProviderDto
             {
                 Id = provider.Id,
-                FullName = provider.FullName,
+                Name = provider.Name,
                 Specialty = provider.Specialty
             };
         }

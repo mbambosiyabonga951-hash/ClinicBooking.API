@@ -25,9 +25,11 @@ public static class DependencyInjection
         // Application services wiring (keeps API Program.cs clean)
         services.AddScoped<IPatientService, PatientService>();
         services.AddScoped<IClinicService, ClinicService>();
+        services.AddScoped<ITimeslotService, TimeslotService>();
         services.AddScoped<IAppointmentService, AppointmentService>();
         services.AddScoped<IProviderService, ProviderService>();
         services.AddScoped<IProviderRepository, ProviderRepository>();
+        services.AddScoped<ITimeslotRepository, TimeslotRepository>();
 
         return services;
     }

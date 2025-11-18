@@ -17,12 +17,27 @@ namespace ClinicBooking.Application.Services
 
         public async Task<IEnumerable<TimeslotDto>> GetByProviderAndDateAsync(int providerId, DateOnly date, CancellationToken ct = default)
         {
-            var logger = _loggerFactory.CreateLogger<TimeslotService>();
-            logger.LogInformation("Fetching available timeslots for ProviderId: {ProviderId} on {Date}",
-                providerId, date);
-            var timeslots = await _timeslotRepository.GetByProviderAndDateAsync(providerId, date, ct);
-            logger.LogInformation("Found {Count} available timeslots for ProviderId: {ProviderId}", timeslots.Count(), providerId   );
-            return (IEnumerable<TimeslotDto>)timeslots;
+            try
+            {
+                var logger = _loggerFactory.CreateLogger<TimeslotService>();
+                logger.LogInformation("Fetching available timeslots for ProviderId: {ProviderId} on {Date}",
+                    providerId, date);
+                var timeslots = await _timeslotRepository.GetByProviderAndDateAsync(providerId, date, ct);
+                logger.LogInformation("Found {Count} available timeslots for ProviderId: {ProviderId}", timeslots.Count(), providerId);
+
+                return timeslots.Select(t => new TimeslotDto
+                {
+                    Id = t.Id,
+                    ProviderId = t.ProviderId,
+                    StartTime = t.StartUtc,
+                    EndTime = t.EndUtc
+                });
+            }
+            catch (Exception ex)
+            {
+                // Return an empty list if an exception occurs
+                return Enumerable.Empty<TimeslotDto>();
+            }
         }
 
         public async Task<TimeslotDto> CreateAsync(int providerId, DateTime startUtc, DateTime endUtc, CancellationToken ct = default)

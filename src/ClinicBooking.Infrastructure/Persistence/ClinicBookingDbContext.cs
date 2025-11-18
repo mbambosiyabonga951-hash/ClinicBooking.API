@@ -28,7 +28,7 @@ namespace ClinicBooking.Infrastructure.Persistence
                 b.ToTable("Providers");
                 b.HasKey(x => x.Id);
 
-                b.Property(x => x.FullName).IsRequired().HasMaxLength(200);
+                b.Property(x => x.Name).IsRequired().HasMaxLength(200);
                 b.Property(x => x.Specialty).HasMaxLength(100);
 
                 b.HasOne(x => x.Clinic)
