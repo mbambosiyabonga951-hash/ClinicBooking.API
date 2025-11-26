@@ -40,13 +40,13 @@ namespace ClinicBooking.Application.Services
             }
         }
 
-        public async Task<TimeslotDto> CreateAsync(int providerId, DateTime startUtc, DateTime endUtc, CancellationToken ct = default)
+        public async Task<TimeslotDto> CreateAsync(int providerId, DateOnly BookingDate, TimeOnly startUtc, TimeOnly endUtc, CancellationToken ct = default)
         {
             var logger = _loggerFactory.CreateLogger<TimeslotService>();
             logger.LogInformation("Creating timeslot for ProviderId: {ProviderId} between {StartDate} and {EndDate}",
                 providerId, startUtc, endUtc);
 
-            var timeslot = await _timeslotRepository.CreateAsync(providerId, startUtc, endUtc, ct);
+            var timeslot = await _timeslotRepository.CreateAsync(providerId, BookingDate, startUtc, endUtc, ct);
 
 
 
@@ -60,6 +60,25 @@ namespace ClinicBooking.Application.Services
                 StartTime = startUtc,
                 EndTime = endUtc
             };
+        }
+
+        public async Task<TimeslotDto> UpdateTimeSlot(UpdateTimeslotRequest request, CancellationToken ct)
+        { 
+            var logger = _loggerFactory.CreateLogger<TimeslotService>();
+
+            logger.LogInformation("Updating timeslot Id: {TimeslotId} to new times {StartUtc} - {EndUtc}",
+                request.TimeslotId, request.StartUtc, request.EndUtc);
+
+            var updatedTimeslot = await _timeslotRepository.UpdateTimeSlot(request.TimeslotId,request.IsBooked, ct);
+            logger.LogInformation("Updated timeslot Id: {TimeslotId}", updatedTimeslot.Id);
+            return new TimeslotDto
+            {
+                Id = updatedTimeslot.Id,
+                ProviderId = updatedTimeslot.ProviderId,
+                StartTime = updatedTimeslot.StartUtc,
+                EndTime = updatedTimeslot.EndUtc
+            };
+
         }
     }
 }

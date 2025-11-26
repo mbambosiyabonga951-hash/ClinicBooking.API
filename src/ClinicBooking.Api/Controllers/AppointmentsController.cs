@@ -42,6 +42,7 @@ public class AppointmentsController : ControllerBase
     }
 
     [HttpPost]
+
     public async Task<ActionResult<AppointmentDto>> Book([FromBody] CreateAppointmentRequest req, CancellationToken ct)
     {
         if (req == null)

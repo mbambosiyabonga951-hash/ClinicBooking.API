@@ -9,8 +9,27 @@ namespace ClinicBooking.Application.DTOs
     public class TimeslotDto
     {
         public long Id { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
+        public TimeOnly StartTime { get; set; }
+        public TimeOnly EndTime { get; set; }
         public long ProviderId { get; set; }
+    }
+
+    public class CreateTimeslotDto
+    {
+        public int ProviderId { get; set; }
+        public DateOnly BookingDate { get; set; }
+        public TimeOnly StartUtc { get; set; }
+        public TimeOnly EndUtc { get; set; }
+    }
+
+    public class UpdateTimeslotRequest
+    {
+        public long TimeslotId { get; set; }
+        public bool IsBooked { get; set; }
+        public long ProviderId { get; set; }
+        public TimeOnly StartUtc { get; set; }
+        public TimeOnly EndUtc { get; set; }
+
+
     }
 }

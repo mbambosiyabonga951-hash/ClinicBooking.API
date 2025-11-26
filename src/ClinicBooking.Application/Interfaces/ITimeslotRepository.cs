@@ -13,7 +13,8 @@ namespace ClinicBooking.Application.Interfaces
     {
 
         Task<IEnumerable<Timeslot>> GetByProviderAndDateAsync(int providerId, DateOnly date, CancellationToken ct);
-        Task<Timeslot> CreateAsync(int providerId, DateTime startUtc, DateTime endUtc, CancellationToken ct);
+        Task<Timeslot> CreateAsync(int providerId, DateOnly BookingDate, TimeOnly startUtc, TimeOnly endUtc, CancellationToken ct);
+        Task<Timeslot> UpdateTimeSlot(long id, bool isBooked, CancellationToken ct = default);
 
 
 

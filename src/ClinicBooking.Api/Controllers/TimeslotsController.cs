@@ -27,5 +27,11 @@ namespace ClinicBooking.Api.Controllers
         {
             return Ok(await service.GetByProviderAndDateAsync(providerId, date, ct));
         }
+
+      [HttpPost("create")]
+      public async Task<ActionResult<TimeslotDto>> Create(int providerId, DateOnly BookingDate,TimeOnly startUtc, TimeOnly endUtc, CancellationToken ct)
+        {
+            return Ok(await service.CreateAsync(providerId, BookingDate, startUtc, endUtc, ct));
+        }
     }
 }

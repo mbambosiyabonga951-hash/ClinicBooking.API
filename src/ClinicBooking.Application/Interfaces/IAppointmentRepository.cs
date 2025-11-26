@@ -10,6 +10,6 @@ namespace ClinicBooking.Application.Interfaces
     public interface IAppointmentRepository
     {
         Task<IEnumerable<Appointment>> GetByClinicAndDateAsync(long clinicId, DateOnly date, CancellationToken ct);
-        Task<Appointment> BookAsync(long clinicId, long patientId, DateOnly date, TimeOnly start, TimeOnly end, CancellationToken ct);
+        Task<Appointment> BookAsync(long clinicId, long patientId, DateOnly date, TimeOnly start, TimeOnly end, long providerId, long timeslotId, CancellationToken ct);
     }
 }
